@@ -1,3 +1,5 @@
+require 'sprockets/railtie'
+
 module FingerprintlessAssets
   class Railtie < ::Rails::Railtie
     initializer :setup_configuration, :before => :load_environment_config do |app|
