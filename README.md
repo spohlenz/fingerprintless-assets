@@ -27,7 +27,7 @@ Rails plugins can require this gem and set these options in an initializer, maki
 The Problem With Fingerprinting
 -------------------------------
 
-Fingerprinting is used to improve caching of assets by including a version-specific fingerprint in the asset filename. From the [Asset Pipeline Rails Guide](http://ryanbigg.com/guides/asset_pipeline.html#what-is-fingerprinting-and-why-should-i-care):
+Fingerprinting is used to improve caching of assets by including a version-specific fingerprint in the asset filename. From the [Asset Pipeline Rails Guide](http://edgeguides.rubyonrails.org/asset_pipeline.html#what-is-fingerprinting-and-why-should-i-care):
 
 > When a filename is unique and based on its content, http headers can be set to encourage caches everywhere (at ISPs, in browsers) to keep there own copy of the content. When the content is updated, the fingerprint will change and the remote clients will request the new file. This is generally known as cachebusting.
 
