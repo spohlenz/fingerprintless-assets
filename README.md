@@ -29,7 +29,7 @@ The Problem With Fingerprinting
 
 Fingerprinting is used to improve caching of assets by including a version-specific fingerprint in the asset filename. From the [Asset Pipeline Rails Guide](http://edgeguides.rubyonrails.org/asset_pipeline.html#what-is-fingerprinting-and-why-should-i-care):
 
-> When a filename is unique and based on its content, http headers can be set to encourage caches everywhere (at ISPs, in browsers) to keep there own copy of the content. When the content is updated, the fingerprint will change and the remote clients will request the new file. This is generally known as cachebusting.
+> When a filename is unique and based on its content, HTTP headers can be set to encourage caches everywhere (at ISPs, in browsers) to keep their own copy of the content. When the content is updated, the fingerprint will change and the remote clients will request the new file. This is generally known as cachebusting.
 
 In the Rails asset pipeline (in production mode), the MD5 hash of the file contents is inserted into the filename, e.g. `application-d41d8cd98f00b204e9800998ecf8427e.js`. This requires that the relevant `asset_url` helpers are used when referencing assets in your HTML, JavaScript or CSS (or CoffeeScript, SASS, etc).
 
