@@ -72,9 +72,10 @@ module EnvironmentTests
 
     sandbox filename, filename_gz do
       assert !File.exist?(filename)
-      @env.precompile("gallery.js")
+      manifest = @env.precompile("gallery.js")
       assert File.exist?(filename)
       assert File.exist?(filename_gz)
+      assert_equal "gallery.js", manifest["gallery.js"]
     end
   end
 
@@ -86,9 +87,10 @@ module EnvironmentTests
 
     sandbox filename, filename_gz do
       assert !File.exist?(filename)
-      @env.precompile("gallery.js")
+      manifest = @env.precompile("gallery.js")
       assert File.exist?(filename)
       assert File.exist?(filename_gz)
+      assert_equal "gallery.js", manifest["gallery.js"]
     end
   end
 
@@ -99,9 +101,10 @@ module EnvironmentTests
 
     sandbox filename, filename_gz do
       assert !File.exist?(filename)
-      @env.precompile("gallery.js")
+      manifest = @env.precompile("gallery.js")
       assert File.exist?(filename)
       assert File.exist?(filename_gz)
+      assert_equal "gallery-#{digest}.js", manifest["gallery.js"]
     end
   end
 
@@ -111,7 +114,7 @@ module EnvironmentTests
 
     sandbox dirname do
       assert !File.exist?(dirname)
-      @env.precompile("mobile/*")
+      manifest = @env.precompile("mobile/*")
 
       assert File.exist?(dirname)
       [nil, '.gz'].each do |gzipped|
@@ -119,6 +122,9 @@ module EnvironmentTests
         assert File.exist?(File.join(dirname, "b.js#{gzipped}"))
         assert File.exist?(File.join(dirname, "c.css#{gzipped}"))
       end
+      assert_equal "mobile/a.js", manifest["mobile/a.js"]
+      assert_equal "mobile/b.js", manifest["mobile/b.js"]
+      assert_equal "mobile/c.css", manifest["mobile/c.css"]
     end
   end
 
@@ -128,7 +134,7 @@ module EnvironmentTests
 
     sandbox dirname do
       assert !File.exist?(dirname)
-      @env.precompile("mobile/*")
+      manifest = @env.precompile("mobile/*")
 
       assert File.exist?(dirname)
       [nil, '.gz'].each do |gzipped|
@@ -136,6 +142,9 @@ module EnvironmentTests
         assert File.exist?(File.join(dirname, "b.js#{gzipped}"))
         assert File.exist?(File.join(dirname, "c.css#{gzipped}"))
       end
+      assert_equal "mobile/a.js", manifest["mobile/a.js"]
+      assert_equal "mobile/b.js", manifest["mobile/b.js"]
+      assert_equal "mobile/c.css", manifest["mobile/c.css"]
     end
   end
 
@@ -148,7 +157,7 @@ module EnvironmentTests
 
     sandbox dirname do
       assert !File.exist?(dirname)
-      @env.precompile("mobile/*")
+      manifest = @env.precompile("mobile/*")
 
       assert File.exist?(dirname)
       [nil, '.gz'].each do |gzipped|
@@ -156,6 +165,9 @@ module EnvironmentTests
         assert File.exist?(File.join(dirname, "b-#{b_digest}.js#{gzipped}"))
         assert File.exist?(File.join(dirname, "c-#{c_digest}.css#{gzipped}"))
       end
+      assert_equal "mobile/a-#{a_digest}.js", manifest["mobile/a.js"]
+      assert_equal "mobile/b-#{b_digest}.js", manifest["mobile/b.js"]
+      assert_equal "mobile/c-#{c_digest}.css", manifest["mobile/c.css"]
     end
   end
 
@@ -165,7 +177,7 @@ module EnvironmentTests
 
     sandbox dirname do
       assert !File.exist?(dirname)
-      @env.precompile(/mobile\/.*/)
+      manifest = @env.precompile(/mobile\/.*/)
 
       assert File.exist?(dirname)
       [nil, '.gz'].each do |gzipped|
@@ -173,6 +185,9 @@ module EnvironmentTests
         assert File.exist?(File.join(dirname, "b.js#{gzipped}"))
         assert File.exist?(File.join(dirname, "c.css#{gzipped}"))
       end
+      assert_equal "mobile/a.js", manifest["mobile/a.js"]
+      assert_equal "mobile/b.js", manifest["mobile/b.js"]
+      assert_equal "mobile/c.css", manifest["mobile/c.css"]
     end
   end
 
@@ -182,7 +197,7 @@ module EnvironmentTests
 
     sandbox dirname do
       assert !File.exist?(dirname)
-      @env.precompile(/mobile\/.*/)
+      manifest = @env.precompile(/mobile\/.*/)
 
       assert File.exist?(dirname)
       [nil, '.gz'].each do |gzipped|
@@ -190,6 +205,9 @@ module EnvironmentTests
         assert File.exist?(File.join(dirname, "b.js#{gzipped}"))
         assert File.exist?(File.join(dirname, "c.css#{gzipped}"))
       end
+      assert_equal "mobile/a.js", manifest["mobile/a.js"]
+      assert_equal "mobile/b.js", manifest["mobile/b.js"]
+      assert_equal "mobile/c.css", manifest["mobile/c.css"]
     end
   end
 
@@ -202,7 +220,7 @@ module EnvironmentTests
 
     sandbox dirname do
       assert !File.exist?(dirname)
-      @env.precompile(/mobile\/.*/)
+      manifest = @env.precompile(/mobile\/.*/)
 
       assert File.exist?(dirname)
       [nil, '.gz'].each do |gzipped|
@@ -210,6 +228,9 @@ module EnvironmentTests
         assert File.exist?(File.join(dirname, "b-#{b_digest}.js#{gzipped}"))
         assert File.exist?(File.join(dirname, "c-#{c_digest}.css#{gzipped}"))
       end
+      assert_equal "mobile/a-#{a_digest}.js", manifest["mobile/a.js"]
+      assert_equal "mobile/b-#{b_digest}.js", manifest["mobile/b.js"]
+      assert_equal "mobile/c-#{c_digest}.css", manifest["mobile/c.css"]
     end
   end
 
@@ -219,9 +240,10 @@ module EnvironmentTests
 
     sandbox filename do
       assert !File.exist?(filename)
-      @env.precompile("hello.txt")
+      manifest = @env.precompile("hello.txt")
       assert File.exist?(filename)
       assert !File.exist?("#{filename}.gz")
+      assert_equal "hello.txt", manifest["hello.txt"]
     end
   end
 
@@ -231,9 +253,10 @@ module EnvironmentTests
 
     sandbox filename do
       assert !File.exist?(filename)
-      @env.precompile("hello.txt")
+      manifest = @env.precompile("hello.txt")
       assert File.exist?(filename)
       assert !File.exist?("#{filename}.gz")
+      assert_equal "hello.txt", manifest["hello.txt"]
     end
   end
 
@@ -243,9 +266,10 @@ module EnvironmentTests
 
     sandbox filename do
       assert !File.exist?(filename)
-      @env.precompile("hello.txt")
+      manifest = @env.precompile("hello.txt")
       assert File.exist?(filename)
       assert !File.exist?("#{filename}.gz")
+      assert_equal "hello-#{digest}.txt", manifest["hello.txt"]
     end
   end
 end
