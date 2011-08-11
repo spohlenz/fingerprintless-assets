@@ -18,14 +18,13 @@ module FingerprintlessAssets
     
     def precompile_asset(asset)
       if fingerprint_path?(asset.logical_path)
-        attributes  = attributes_for(asset.logical_path)
-        digest_path = attributes.path_with_fingerprint(asset.digest)
-        path        = digest_path
+        attributes = attributes_for(asset.logical_path)
+        asset_path = attributes.path_with_fingerprint(asset.digest)
       else
-        path        = asset.logical_path
+        asset_path = asset.logical_path
       end
 
-      filename = static_root.join(path)
+      filename = static_root.join(asset_path)
 
       # Ensure directory exists
       FileUtils.mkdir_p filename.dirname
@@ -36,7 +35,7 @@ module FingerprintlessAssets
       # Write compressed file if its a bundled asset like .js or .css
       asset.write_to("#{filename}.gz") if asset.is_a?(Sprockets::BundledAsset)
 
-      path
+      asset_path
     end
   end
 end
