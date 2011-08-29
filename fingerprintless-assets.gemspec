@@ -7,5 +7,5 @@ Gem::Specification.new do |s|
   s.authors = ["Sam Pohlenz"]
   s.email = "sam@sampohlenz.com"
   
-  s.add_dependency "sprockets", "~> 2.0.0.beta.12"
+  s.add_dependency "sprockets", "~> 2.0.0.beta.15"
 end
