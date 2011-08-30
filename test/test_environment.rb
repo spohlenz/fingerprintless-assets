@@ -9,7 +9,6 @@ module EnvironmentTests
   def new_environment
     Sprockets::Environment.new(".") do |env|
       env.append_path(fixture_path('default'))
-      env.static_root = fixture_path('public')
       env.cache = {}
       yield env if block_given?
     end
